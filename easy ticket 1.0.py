@@ -8,24 +8,14 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.support.wait import WebDriverWait
 
+#cap = DesiredCapabilities().FIREFOX
+#cap["marionette"] = False
+#binary = FirefoxBinary('C:\Program Files\Mozilla Firefox\firefox.exe')
+#driver = webdriver.Firefox(capabilities=cap, executable_path=r"C:\geckodriver.exe",firefox_binary=binary)
 driver = webdriver.Chrome("C:\chromedriver.exe")
 
 driver.get("https://www.irctc.co.in/nget/train-search")
 driver.maximize_window()
-WebDriverWait(driver,60).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR,"a[id='loginText']"))
-    ).send_keys(Keys.ENTER)
-#driver.find_element_by_css_selector('a[id="loginText"]').click()
-user = WebDriverWait(driver,60).until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR,"input[name='userId']"))
-    )
-user.send_keys("shivnikki")
-passw = WebDriverWait(driver,60).until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR,"input[name='pwd']"))
-    )
-passw.send_keys("Qwerty234")
-#userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
-#pas = driver.find_element_by_css_selector('input[name="pwd"]').send_keys("Qwerty234")
 forms = driver.find_element_by_xpath('//input[@placeholder="From*"]')
 forms.send_keys("NEW DELHI - NDLS")
 forms = driver.find_element_by_xpath('//input[@placeholder="To*"]')
@@ -36,33 +26,52 @@ driver.implicitly_wait(10)
 driver.implicitly_wait(10)
 
 forms.clear()
-forms.send_keys("19-02-2019")
+forms.send_keys("28-01-2019")
 forms.clear()
-forms.send_keys("19-02-2019")
+forms.send_keys("28-01-2019")
+forms.send_keys(Keys.ENTER)
 driver.maximize_window()
-WebDriverWait(driver,60).until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR,"select[formcontrolname='classInput']"))
-    ).send_keys("Sleeper(SL)")
+driver.maximize_window()
+#r = WebDriverWait(driver,60).until(
+#
+ #       EC.visibility_of_elements_located((By.CSS_SELECTOR,"label[class='ng-tns-c13-13 ui-dropdown-label ui-inputtext ui-corner-all ng-star-inserted']"))
+  #  )
+#act = ActionChains(driver)
+#act.move_to_element(r)
+#act.send_keys("TATKAL")
+#
+e = WebDriverWait(driver,60).until(
+
+        EC.element_to_be_clickable((By.CSS_SELECTOR,"label[class='ng-tns-c13-13 ui-dropdown-label ui-inputtext ui-corner-all ng-star-inserted']"))
+    )
+e.click()
+#f = driver.find_element_by_css_selector("span[text='TATKAL']")
+
+f = WebDriverWait(driver,60).until(
+
+        EC.visibility_of_element_located((By.XPATH,"//span[text()='TATKAL']"))
+    )
+f.click()
 m = driver.find_elements_by_css_selector('button[id="check-availability"]')[0].send_keys(Keys.ENTER)
-t = driver.find_elements_by_css_selector('button[type="submit"]')[0].send_keys(Keys.ENTER)
-element = WebDriverWait(driver,10).until(
+#t = driver.find_elements_by_css_selector('button[type="submit"]')[0].send_keys(Keys.ENTER)
+#element = WebDriverWait(driver,10).until(
 
-        EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Check availability & fare')]"))
-    ).text
-print(element)
-element = WebDriverWait(driver,60).until(
+ #       EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Check availability & fare')]"))
+ #   ).text
+#print(element)
+#element = WebDriverWait(driver,10).until(
 
-        EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Check availability & fare')]"))
-    ).send_keys(Keys.ENTER)
-print(element)
-element.click()
+ #       EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Check availability & fare')]"))
+  #  ).send_keys(Keys.ENTER)
+#print(element)
+#element.click()
 element1 = WebDriverWait(driver,60).until(
         EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Book Now')]"))
     ).send_keys(Keys.ENTER)
 userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
 pas = driver.find_element_by_css_selector('input[name="pwd"]').send_keys("Qwerty234")
-name = driver.find_element_by_css_selector('input[name="passengerName"]').send_keys("Qwerty")
-age = driver.find_element_by_css_selector('input[name="passengerAge"]').send_keys("67")
+#name = driver.find_element_by_css_selector('input[name="passengerName"]').send_keys("Qwerty")
+#age = driver.find_element_by_css_selector('input[name="passengerAge"]').send_keys("67")
 WebDriverWait(driver,60).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR,"input[name='psgn-name']"))
     ).send_keys("Qwerty")
@@ -76,12 +85,12 @@ WebDriverWait(driver,60).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR,"select[formcontrolname='passengerBerthChoice']"))
     ).send_keys("Upper")
 
+WebDriverWait(driver,60).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR,"label[for='travelInsuranceOptedNo']"))
+    ).click()
 #WebDriverWait(driver,60).until(
- #       EC.visibility_of_element_located((By.CSS_SELECTOR,"label[for='travelInsuranceOptedNo']"))
-  #  ).click()
-#WebDriverWait(driver,60).until(
- #       EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Continue Booking')]"))
-  #  ).send_keys(Keys.ENTER)
+       # EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Continue Booking')]"))
+    #).send_keys(Keys.ENTER)
 
 
 
