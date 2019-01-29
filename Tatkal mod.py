@@ -7,6 +7,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.support.wait import WebDriverWait
+import time
 
 #cap = DesiredCapabilities().FIREFOX
 #cap["marionette"] = False
@@ -16,8 +17,24 @@ driver = webdriver.Chrome("C:\chromedriver.exe")
 
 driver.get("https://www.irctc.co.in/nget/train-search")
 driver.maximize_window()
-forms = driver.find_element_by_xpath('//input[@placeholder="From*"]')
-forms.send_keys("NEW DELHI - NDLS")
+elem = WebDriverWait(driver,60).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR,'input[name="userId"]'))
+    )
+elem.send_keys("shivnikki")
+#userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
+#pas = driver.find_element_by_css_selector('input[name="pwd"]').send_keys("Qwerty234")
+elem = WebDriverWait(driver,60).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR,'input[name="pwd"]'))
+    )
+elem.send_keys("Qwerty234")
+time.sleep(20)
+elem = WebDriverWait(driver,600).until(
+        EC.element_to_be_clickable((By.XPATH,'//input[@placeholder="From*"]'))
+    )
+elem.click()
+elem.send_keys("NEW DELHI - NDLS")
+#forms = driver.find_element_by_xpath('//input[@placeholder="From*"]')
+#forms.send_keys("NEW DELHI - NDLS")
 forms = driver.find_element_by_xpath('//input[@placeholder="To*"]')
 forms.send_keys("SHAHJEHANPUR - SPN")
 driver.implicitly_wait(10)
@@ -68,8 +85,8 @@ m = driver.find_elements_by_css_selector('button[id="check-availability"]')[0].s
 element1 = WebDriverWait(driver,60).until(
         EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Book Now')]"))
     ).send_keys(Keys.ENTER)
-userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
-pas = driver.find_element_by_css_selector('input[name="pwd"]').send_keys("Qwerty234")
+#userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
+#pas = driver.find_element_by_css_selector('input[name="pwd"]').send_keys("Qwerty234")
 #name = driver.find_element_by_css_selector('input[name="passengerName"]').send_keys("Qwerty")
 #age = driver.find_element_by_css_selector('input[name="passengerAge"]').send_keys("67")
 WebDriverWait(driver,60).until(
