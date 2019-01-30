@@ -16,6 +16,7 @@ import time
 driver = webdriver.Chrome("C:\chromedriver.exe")
 
 driver.get("https://www.irctc.co.in/nget/train-search")
+time.sleep(10)
 driver.maximize_window()
 elem = WebDriverWait(driver,60).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR,'input[name="userId"]'))
@@ -43,9 +44,9 @@ driver.implicitly_wait(10)
 driver.implicitly_wait(10)
 
 forms.clear()
-forms.send_keys("28-01-2019")
+forms.send_keys("31-01-2019")
 forms.clear()
-forms.send_keys("28-01-2019")
+forms.send_keys("31-01-2019")
 forms.send_keys(Keys.ENTER)
 driver.maximize_window()
 driver.maximize_window()
@@ -64,11 +65,14 @@ driver.maximize_window()
 #e.click()
 #f = driver.find_element_by_css_selector("span[text='TATKAL']")
 
-f = WebDriverWait(driver,60).until(
+f = WebDriverWait(driver,600).until(
 
         EC.visibility_of_element_located((By.XPATH,"//span[text()='TATKAL']"))
     )
 f.click()
+WebDriverWait(driver,600).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR,"select[formcontrolname='classInput']"))
+    ).send_keys("Sleeper(SL)")
 m = driver.find_elements_by_css_selector('button[id="check-availability"]')[0].send_keys(Keys.ENTER)
 #t = driver.find_elements_by_css_selector('button[type="submit"]')[0].send_keys(Keys.ENTER)
 #element = WebDriverWait(driver,10).until(
@@ -82,7 +86,7 @@ m = driver.find_elements_by_css_selector('button[id="check-availability"]')[0].s
   #  ).send_keys(Keys.ENTER)
 #print(element)
 #element.click()
-element1 = WebDriverWait(driver,60).until(
+element1 = WebDriverWait(driver,600).until(
         EC.element_to_be_clickable((By.XPATH,"//button[contains(text(),'Book Now')]"))
     ).send_keys(Keys.ENTER)
 #userid = driver.find_element_by_css_selector('input[name="userId"]').send_keys("shivnikki")
